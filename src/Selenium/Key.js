@@ -2,8 +2,8 @@
 
 var k = require("selenium-webdriver").Key;
 
-exports.altKey = k.ALT;
-exports.controlKey = k.CONTROL;
-exports.shiftKey = k.SHIFT;
-exports.commandKey = k.COMMAND;
-exports.metaKey = k.META;
+export const altKey = k.ALT;
+export const controlKey = k.CONTROL;
+export const shiftKey = k.SHIFT;
+export const commandKey = k.COMMAND;
+export const metaKey = k.META;

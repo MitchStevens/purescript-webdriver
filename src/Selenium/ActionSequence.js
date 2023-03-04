@@ -1,7 +1,7 @@
 // module Selenium.ActionSequence
-var webdriver = require("selenium-webdriver");
+import webdriver from "selenium-webdriver";
 
-exports._newSequence = function(driver) {
+export const _newSequence = function(driver) {
     return function(eb, cb) {
         try {
             return cb(new webdriver.ActionSequence(driver));
@@ -12,7 +12,7 @@ exports._newSequence = function(driver) {
     };
 };
 
-exports._performSequence = function(sequence) {
+export const _performSequence = function(sequence) {
     return function(eb, cb) {
         try {
             return sequence.perform().then(cb, eb);
@@ -23,36 +23,36 @@ exports._performSequence = function(sequence) {
     };
 };
 
-exports._click = function(seq, btn, el) {
+export const _click = function(seq, btn, el) {
     return seq.click(el, btn);
 };
-exports._doubleClick = function(seq, btn, el) {
+export const _doubleClick = function(seq, btn, el) {
     return seq.doubleClick(el, btn);
 };
-exports._mouseToElement = function(seq, el) {
+export const _mouseToElement = function(seq, el) {
     return seq.mouseMove(el);
 };
-exports._mouseToLocation = function(seq, loc) {
+export const _mouseToLocation = function(seq, loc) {
     return seq.mouseMove(loc);
 };
-exports._mouseDown = function(seq, btn, el) {
+export const _mouseDown = function(seq, btn, el) {
     return seq.mouseDown(el, btn);
 };
-exports._mouseUp = function(seq, btn, el) {
+export const _mouseUp = function(seq, btn, el) {
     return seq.mouseUp(el, btn);
 };
-exports._keyDown = function(seq, key) {
+export const _keyDown = function(seq, key) {
     return seq.keyDown(key);
 };
-exports._keyUp = function(seq, key) {
+export const _keyUp = function(seq, key) {
     return seq.keyUp(key);
 };
-exports._sendKeys = function(seq, keys) {
+export const _sendKeys = function(seq, keys) {
     return seq.sendKeys(keys);
 };
-exports._dndToElement = function(seq, el, tgt) {
+export const _dndToElement = function(seq, el, tgt) {
     return seq.dragAndDrop(el, tgt);
 };
-exports._dndToLocation = function(seq, el, tgt) {
+export const _dndToLocation = function(seq, el, tgt) {
     return seq.dragAndDrop(el, tgt);
 };

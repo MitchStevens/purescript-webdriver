@@ -1,7 +1,7 @@
 // module Selenium.Remote
 
-var remote = require('selenium-webdriver/remote');
+import remote from 'selenium-webdriver/remote';
 
-exports.fileDetector = function () {
+export const fileDetector = function () {
   return new remote.FileDetector();
 };

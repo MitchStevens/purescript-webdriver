@@ -18,7 +18,6 @@
   "license": "Apache-2.0",
   "dependencies": {
     "purescript-aff": "^5.0.0",
-    "purescript-aff-reattempt": "^5.0.0",
     "purescript-aff-promise": "^2.0.0",
     "purescript-web-html": "^1.0.0",
     "purescript-web-uievents": "^1.0.0"

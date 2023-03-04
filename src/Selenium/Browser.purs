@@ -1,11 +1,11 @@
 module Selenium.Browser
   ( Browser(..)
-  , browser2str
-  , str2browser
   , browserCapabilities
-  , versionCapabilities
   , platformCapabilities
-  ) where
+  , str2browser
+  , versionCapabilities
+  )
+  where
 
 import Prelude
 

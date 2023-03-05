@@ -1,4 +1,4 @@
 // module Selenium.ScrollBehaviour
 
-export const top = 0;
-export const bottom = 1;
+exports.top = 0;
+exports.bottom = 1;

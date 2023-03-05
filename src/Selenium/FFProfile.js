@@ -1,11 +1,11 @@
 // module Selenium.FFProfile
 
-export const _newFFProfile = function(eb, cb) {
+exports._newFFProfile = function(eb, cb) {
     var FirefoxProfile = require('selenium-webdriver/firefox/profile.js').Profile;
     return cb(new FirefoxProfile());
 };
 
-export const _setFFPreference = function(key) {
+exports._setFFPreference = function(key) {
     return function(val) {
         return function(p) {
             p.setPreference(key, val);
@@ -14,7 +14,7 @@ export const _setFFPreference = function(key) {
     };
 };
 
-export const _encode = function(p) {
+exports._encode = function(p) {
     return function(eb, cb) {
         p.encode()
             .then(function(c) { return cb({firefox_profile: c});}, eb);

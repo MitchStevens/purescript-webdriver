@@ -1,4 +1,11 @@
-{
+{ "name": "purescript-webdriver",
+  "description": "A PureScript interface to Selenium's Node Webdriver",
+  "keywords": [
+    "purescript",
+    "webdriver",
+    "selenium"
+  ],
+  "license": "Apache-2.0",
   "private": true,
   "scripts": {
     "build": "spago build",
@@ -9,6 +16,6 @@
     "selenium-webdriver": "4.8.1"
   },
   "devDependencies": {
-    "purescript": "^0.15.7"
+    "purescript": "^0.14.7"
   }
 }

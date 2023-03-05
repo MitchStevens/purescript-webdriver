@@ -1,13 +1,13 @@
 // module Selenium.Browser
 
-export const _browserCapabilities = function(br) {
+exports._browserCapabilities = function(br) {
     return {browserName: br};
 };
 
-export const versionCapabilities = function(v) {
+exports.versionCapabilities = function(v) {
     return {version: v};
 };
 
-export const platformCapabilities = function(p) {
+exports.platformCapabilities = function(p) {
     return {platform: p};
 };

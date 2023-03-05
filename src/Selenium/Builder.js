@@ -1,8 +1,8 @@
 // module Selenium.Builder
 
-import webdriver from "selenium-webdriver";
+var webdriver = require("selenium-webdriver");
 
-export const _newBuilder = function(eb, cb) {
+exports._newBuilder = function(eb, cb) {
     try {
         return cb(new webdriver.Builder());
     }
@@ -11,20 +11,20 @@ export const _newBuilder = function(eb, cb) {
     }
 };
 
-export const _build = function(builder) {
+exports._build = function(builder) {
     return function(eb, cb) {
         builder.build().then(cb, eb);
     };
 };
 
-export const _usingServer = function(b, s) {
+exports._usingServer = function(b, s) {
     return b.usingServer(s);
 };
 
-export const _setScrollBehaviour = function(b, bh) {
+exports._setScrollBehaviour = function(b, bh) {
     return b.setScrollBehaviour(bh);
 };
 
-export const _withCapabilities = function(b, c) {
+exports._withCapabilities = function(b, c) {
     return b.withCapabilities(c);
 };

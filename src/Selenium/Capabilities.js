@@ -1,8 +1,8 @@
 // module Selenium.Capabilities
 
-export const emptyCapabilities = {};
+exports.emptyCapabilities = {};
 
-export const appendCapabilities = function(first) {
+exports.appendCapabilities = function(first) {
     return function(second) {
         var i, key,
             firstKeys = Object.keys(first),

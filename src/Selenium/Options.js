@@ -1,4 +1,4 @@
-const { Options, Browser, Capabilities } = require("selenium-webdriver");
+const { Browser, Capabilities } = require("selenium-webdriver");
 const chrome = require("selenium-webdriver/chrome");
 
 exports.chromeOptions   = chrome.Options( Capabilities.chrome())
@@ -9,7 +9,7 @@ exports.safariOptions   = null //Capabilities.safari()
 
 exports.setHeadless = function(options) {
     switch(options.getBrowserName()) {
-        case Browser.CHROME: return Options(options).headless()
+        case Browser.CHROME: return chrome.Options(options).headless()
         default: throw new Error("no headless option")
     }
 }

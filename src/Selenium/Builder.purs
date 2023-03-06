@@ -14,6 +14,7 @@ import Prelude
 
 import Control.Monad.Writer (Writer, execWriter)
 import Control.Monad.Writer.Class (tell)
+import Data.Exists (mkExists)
 import Data.Foldable (foldl)
 import Data.Function.Uncurried (Fn2, runFn2)
 import Data.List (List(..), singleton)
@@ -22,7 +23,7 @@ import Effect.Aff (Aff)
 import Effect.Aff.Compat (EffectFnAff, fromEffectFnAff)
 import Selenium.Browser (Browser, browserCapabilities, platformCapabilities, versionCapabilities)
 import Selenium.Capabilities (Capabilities, emptyCapabilities)
-import Selenium.Options (Options)
+import Selenium.Options (Options, Options')
 import Selenium.Types (Builder, ControlFlow, Driver, LoggingPrefs, ProxyConfig, ScrollBehaviour)
 
 data Command
@@ -68,8 +69,8 @@ usingServer = rule <<< UsingServer
 scrollBehaviour ∷ ScrollBehaviour → Build Unit
 scrollBehaviour = rule <<< SetScrollBehaviour
 
-options :: Options -> Build Unit
-options = rule <<< SetOptions
+options :: forall r. Options' r -> Build Unit
+options = rule <<< SetOptions <<< mkExists
 
 withCapabilities ∷ Capabilities → Build Unit
 withCapabilities c = Build $ tell $ Tuple c noRules

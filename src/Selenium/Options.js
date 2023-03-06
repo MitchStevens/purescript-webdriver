@@ -9,7 +9,7 @@ exports.safariOptions   = null //Capabilities.safari()
 
 exports.setHeadless = function(options) {
     switch(options.getBrowserName()) {
-        case Browser.CHROME: return chrome.Options(options).headless()
+        case Browser.CHROME: return new chrome.Options(options).headless()
         default: throw new Error("no headless option")
     }
 }

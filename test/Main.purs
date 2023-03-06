@@ -10,12 +10,14 @@ import Effect.Class (liftEffect)
 import Effect.Console (log)
 import Selenium (byCss, byName, clickEl, findElement, get, getTitle, quit, sendKeysEl, wait)
 import Selenium.Browser (Browser(..))
-import Selenium.Builder (browser, build)
+import Selenium.Builder (build, options)
+import Selenium.Options (chromeOptions)
 
 main :: Effect Unit
 main = do
   void $ launchAff do
-    driver <- build $ browser Chrome
+    driver <- build Chrome $ do
+      options chromeOptions
     get driver "http://google.com/ncr"
     byName "q" >>=
       findElement driver >>=

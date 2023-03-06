@@ -12,6 +12,7 @@ exports._newBuilder = function(eb, cb) {
 };
 
 exports._build = function(builder) {
+    //builder.forBrowser(builder.chromeOptions_.getBrowserName())
     return function(eb, cb) {
         builder.build().then(cb, eb);
     };
@@ -26,15 +27,29 @@ exports._setScrollBehaviour = function(b, bh) {
 };
 
 exports._withCapabilities = function(b, c) {
+    console.log(c)
     return b.withCapabilities(c);
 };
 
-//lol, lmao
 exports._setOptions = function(b, options) {
-    b.setChromeOptions(options)
-    b.setEdgeOptions(options)
-    b.setFirefoxOptions(options)
-    b.setIeOptions(options)
-    b.setSafariOptions(options)
+    switch (options.getBrowserName()) {
+        case webdriver.Browser.CHROME:
+            b.setChromeOptions(options)
+            break
+        case webdriver.Browser.EDGE:
+            b.setEdgeOptions(options)
+            break
+        case webdriver.Browser.FIREFOX:
+            b.setFirefoxOptions(options)
+            break
+        case webdriver.Browser.INTERNET_EXPLORER:
+            b.setIeOptions(options)
+            break
+        case webdriver.Browser.SAFARI:
+            b.setSafariOptions(options)
+            break
+        default:
+    }
+    console.log(b)
     return b
 }

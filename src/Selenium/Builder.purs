@@ -1,13 +1,13 @@
 module Selenium.Builder
   ( build
-  , browser
-  , version
-  , platform
+  --, browser
+  --, version
+  --, platform
   , usingServer
   , scrollBehaviour
   , options
-  , withCapabilities
   , Build
+  , Command
   ) where
 
 import Prelude
@@ -17,7 +17,7 @@ import Control.Monad.Writer.Class (tell)
 import Data.Exists (mkExists)
 import Data.Foldable (foldl)
 import Data.Function.Uncurried (Fn2, runFn2)
-import Data.List (List(..), singleton)
+import Data.List (List(..), foldM, singleton)
 import Data.Tuple (Tuple(..))
 import Effect.Aff (Aff)
 import Effect.Aff.Compat (EffectFnAff, fromEffectFnAff)
@@ -35,33 +35,20 @@ data Command
   | SetScrollBehaviour ScrollBehaviour
   | UsingServer String
 
-newtype Build a = Build (Writer (Tuple Capabilities (List Command)) a)
-
-unBuild ∷ ∀ a. Build a → Writer (Tuple Capabilities (List Command)) a
-unBuild (Build a) = a
-
-instance functorBuild ∷ Functor Build where
-  map f (Build a) = Build $ f <$> a
-
-instance applyBuild ∷ Apply Build where
-  apply (Build f) (Build w) = Build $ f <*> w
-
-instance bindBuild ∷ Bind Build where
-  bind (Build w) f = Build $ w >>= unBuild <<< f
-
-instance applicativeBuild ∷ Applicative Build where
-  pure = Build <<< pure
-
-instance monadBuild ∷ Monad Build
+-- TODO: make this a newtype again to fix the import
+type Build a = Writer (List Command) a
 
 rule ∷ Command → Build Unit
-rule = Build <<< tell <<< Tuple emptyCapabilities <<< singleton
+rule = tell <<< pure
 
-version ∷ String → Build Unit
-version = withCapabilities <<< versionCapabilities
-
-platform ∷ String → Build Unit
-platform = withCapabilities <<< platformCapabilities
+--version ∷ String → Build Unit
+--version = withCapabilities <<< versionCapabilities
+--
+--platform ∷ String → Build Unit
+--platform = withCapabilities <<< platformCapabilities
+--
+--withCapabilities ∷ Capabilities → Build Unit
+--withCapabilities c = Build $ tell $ Tuple c noRules
 
 usingServer ∷ String → Build Unit
 usingServer = rule <<< UsingServer
@@ -70,23 +57,17 @@ scrollBehaviour ∷ ScrollBehaviour → Build Unit
 scrollBehaviour = rule <<< SetScrollBehaviour
 
 options :: forall r. Options' r -> Build Unit
-options = rule <<< SetOptions <<< mkExists
+options opts = rule (SetOptions (mkExists opts))
 
-withCapabilities ∷ Capabilities → Build Unit
-withCapabilities c = Build $ tell $ Tuple c noRules
-  where
-  noRules ∷ List Command
-  noRules = Nil
+--browser ∷ Browser → Build Unit
+--browser = withCapabilities <<< browserCapabilities
 
-browser ∷ Browser → Build Unit
-browser = withCapabilities <<< browserCapabilities
-
-build ∷ Build Unit → Aff Driver
-build dsl = do
-  builder ← fromEffectFnAff _newBuilder
-  case execWriter $ unBuild dsl of
-    Tuple capabilities commands →
-      fromEffectFnAff $ _build $ runFn2 _withCapabilities (interpret commands builder) capabilities
+build ∷ Browser -> Build Unit → Aff Driver
+build browser dsl = do
+  newBuilder ← fromEffectFnAff _newBuilder
+  let capabilities = browserCapabilities browser
+  let builder = runFn2 _withCapabilities (interpret (execWriter dsl) newBuilder) capabilities
+  fromEffectFnAff $ _build $ builder
 
 interpret ∷ List Command → Builder → Builder
 interpret commands initialBuilder = foldl foldFn initialBuilder commands

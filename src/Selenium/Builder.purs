@@ -5,6 +5,7 @@ module Selenium.Builder
   , platform
   , usingServer
   , scrollBehaviour
+  , options
   , withCapabilities
   , Build
   ) where
@@ -67,6 +68,9 @@ usingServer = rule <<< UsingServer
 scrollBehaviour ∷ ScrollBehaviour → Build Unit
 scrollBehaviour = rule <<< SetScrollBehaviour
 
+options :: Options -> Build Unit
+options = rule <<< SetOptions
+
 withCapabilities ∷ Capabilities → Build Unit
 withCapabilities c = Build $ tell $ Tuple c noRules
   where
@@ -89,6 +93,7 @@ interpret commands initialBuilder = foldl foldFn initialBuilder commands
   foldFn ∷ Builder → Command → Builder
   foldFn b (UsingServer s) = runFn2 _usingServer b s
   foldFn b (SetScrollBehaviour bh) = runFn2 _setScrollBehaviour b bh
+  foldFn b (SetOptions opts) = runFn2 _setOptions b opts
   foldFn b _ = b
 
 
@@ -98,3 +103,4 @@ foreign import _build ∷ Builder → EffectFnAff Driver
 foreign import _usingServer ∷ Fn2 Builder String Builder
 foreign import _setScrollBehaviour ∷ Fn2 Builder ScrollBehaviour Builder
 foreign import _withCapabilities ∷ Fn2 Builder Capabilities Builder
+foreign import _setOptions ∷ Fn2 Builder Options Builder

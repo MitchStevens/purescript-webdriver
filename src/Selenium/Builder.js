@@ -28,3 +28,12 @@ exports._setScrollBehaviour = function(b, bh) {
 exports._withCapabilities = function(b, c) {
     return b.withCapabilities(c);
 };
+
+//lol, lmao
+exports._setOptions = function(b, options) {
+    b.setChromeOptions(options)
+    b.setEdgeOptions(options)
+    b.setFirefoxOptions(options)
+    b.setIeOptions(options)
+    b.setSafariOptions(options)
+}

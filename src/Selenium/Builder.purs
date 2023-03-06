@@ -11,28 +11,25 @@ module Selenium.Builder
 
 import Prelude
 
-import Effect.Aff (Aff)
-import Effect.Aff.Compat (EffectFnAff, fromEffectFnAff)
 import Control.Monad.Writer (Writer, execWriter)
 import Control.Monad.Writer.Class (tell)
 import Data.Foldable (foldl)
 import Data.Function.Uncurried (Fn2, runFn2)
 import Data.List (List(..), singleton)
 import Data.Tuple (Tuple(..))
+import Effect.Aff (Aff)
+import Effect.Aff.Compat (EffectFnAff, fromEffectFnAff)
 import Selenium.Browser (Browser, browserCapabilities, platformCapabilities, versionCapabilities)
 import Selenium.Capabilities (Capabilities, emptyCapabilities)
-import Selenium.Types (Builder, ScrollBehaviour, Driver, SafariOptions, ProxyConfig, OperaOptions, LoggingPrefs, IEOptions, FirefoxOptions, ControlFlow, ChromeOptions)
+import Selenium.Options (Options)
+import Selenium.Types (Builder, ControlFlow, Driver, LoggingPrefs, ProxyConfig, ScrollBehaviour)
 
 data Command
-  = SetChromeOptions ChromeOptions
+  = SetOptions Options
   | SetControlFlow ControlFlow
   | SetEnableNativeEvents Boolean
-  | SetFirefoxOptions FirefoxOptions
-  | SetIeOptions IEOptions
   | SetLoggingPrefs LoggingPrefs
-  | SetOperaOptions OperaOptions
   | SetProxy ProxyConfig
-  | SetSafariOptions SafariOptions
   | SetScrollBehaviour ScrollBehaviour
   | UsingServer String
 

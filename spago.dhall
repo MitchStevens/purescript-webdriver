@@ -9,6 +9,7 @@
   , "effect"
   , "either"
   , "exceptions"
+  , "exists"
   , "foldable-traversable"
   , "foreign"
   , "functions"

@@ -15,14 +15,9 @@ foreign import data Element ∷ Type
 foreign import data Locator ∷ Type
 foreign import data ActionSequence ∷ Type
 foreign import data MouseButton ∷ Type
-foreign import data ChromeOptions ∷ Type
 foreign import data ControlFlow ∷ Type
-foreign import data FirefoxOptions ∷ Type
-foreign import data IEOptions ∷ Type
 foreign import data LoggingPrefs ∷ Type
-foreign import data OperaOptions ∷ Type
 foreign import data ProxyConfig ∷ Type
-foreign import data SafariOptions ∷ Type
 foreign import data ScrollBehaviour ∷ Type
 foreign import data FileDetector ∷ Type
 foreign import data WindowHandle ∷ Type

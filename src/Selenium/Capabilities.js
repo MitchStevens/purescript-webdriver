@@ -1,25 +1,41 @@
 // module Selenium.Capabilities
 
-exports.emptyCapabilities = {};
+const { Capabilities } = require("selenium-webdriver");
+
+exports.emptyCapabilities = new Capabilities();
 
 exports.appendCapabilities = function(first) {
     return function(second) {
-        var i, key,
-            firstKeys = Object.keys(first),
-            secondKeys = Object.keys(second),
-            result = {};
-        for (i = 0; i < firstKeys.length; i++) {
-            key = firstKeys[i];
-            if (first.hasOwnProperty(key)) {
-                result[key] = first[key];
-            }
-        }
-        for (i = 0; i < secondKeys.length; i++) {
-            key = secondKeys[i];
-            if (second.hasOwnProperty(key)) {
-                result[key] = second[key];
-            }
-        }
-        return result;
+        new Capabilities(first).merge(second)
     };
 };
+
+exports.deleteCapability = function(key) {
+    return function(capabilities) {
+        return new Capabilities(capabilities).delete(key)
+    }
+}
+
+exports._getCapability = function(nothing) {
+    return function(just) {
+        return function(key) {
+            return function(capabilities) {
+                return capabilities.get(key)
+            }
+        }
+    }
+}
+
+exports.setCapability = function(key) {
+    return function(value) {
+        return function(capabilities) {
+            return new Capabilities(capabilities).set(key, value)
+        }
+    }
+}
+
+exports.hasCapability = function(key) {
+    return function(capabilities) {
+        return capabilities.has(key)
+    }
+}

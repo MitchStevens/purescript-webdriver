@@ -12,7 +12,6 @@ exports._newBuilder = function(eb, cb) {
 };
 
 exports._build = function(builder) {
-    //builder.forBrowser(builder.chromeOptions_.getBrowserName())
     return function(eb, cb) {
         builder.build().then(cb, eb);
     };
@@ -27,7 +26,6 @@ exports._setScrollBehaviour = function(b, bh) {
 };
 
 exports._withCapabilities = function(b, c) {
-    console.log(c)
     return b.withCapabilities(c);
 };
 
@@ -50,6 +48,5 @@ exports._setOptions = function(b, options) {
             break
         default:
     }
-    console.log(b)
     return b
 }

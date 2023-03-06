@@ -36,4 +36,5 @@ exports._setOptions = function(b, options) {
     b.setFirefoxOptions(options)
     b.setIeOptions(options)
     b.setSafariOptions(options)
+    return b
 }

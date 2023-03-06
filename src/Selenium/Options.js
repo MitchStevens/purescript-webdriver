@@ -1,10 +1,11 @@
 const { Options, Browser, Capabilities } = require("selenium-webdriver");
+const chrome = require("selenium-webdriver/chrome");
 
-exports.chromeOptions = new Options(Capabilities.chrome())
-exports.edgeOptions = new Options(Capabilities.edge())
-exports.firefoxOptions = new Options(Capabilities.firefox())
-exports.ieOptions = new Options(Capabilities.ie())
-exports.safariOptions = new Options(Capabilities.safari())
+exports.chromeOptions   = chrome.Options( Capabilities.chrome())
+exports.edgeOptions     = null //Capabilities.edge()
+exports.firefoxOptions  = null //Capabilities.firefox()
+exports.ieOptions       = null //Capabilities.ie()
+exports.safariOptions   = null //Capabilities.safari()
 
 exports.setHeadless = function(options) {
     switch(options.getBrowserName()) {

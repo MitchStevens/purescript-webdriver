@@ -6,6 +6,8 @@ import Data.Exists (Exists)
 
 foreign import data Options' :: Row Type -> Type
 
+
+
 type ChromeOptions = Options' ( headless :: Void )
 type EdgeOptions = Options' ()
 type FirefoxOptions = Options' ()
@@ -24,5 +26,7 @@ foreign import setHeadless
   :: forall r. Options' ( headless :: Void | r ) 
   -> Options' ( headless :: Void | r)
 
-
+foreign import setNoSandBox
+  :: forall r. Options' ( noSandbox :: Void | r ) 
+  -> Options' ( noSandbox :: Void | r)
 

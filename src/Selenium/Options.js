@@ -13,3 +13,10 @@ exports.setHeadless = function(options) {
         default: throw new Error("no headless option")
     }
 }
+
+exports.setNoSandBox = function(options) {
+    switch(options.getBrowserName()) {
+        case Browser.CHROME: return new chrome.Options(options).addArguments("--no-sandbox")
+        default: throw new Error("no 'no sandbox' option")
+    }
+}

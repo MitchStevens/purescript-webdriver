@@ -14,7 +14,7 @@ exports.setHeadless = function(options) {
     }
 }
 
-exports.setNoSandBox = function(options) {
+exports.setNoSandbox = function(options) {
     switch(options.getBrowserName()) {
         case Browser.CHROME: return new chrome.Options(options).addArguments("--no-sandbox")
         default: throw new Error("no 'no sandbox' option")

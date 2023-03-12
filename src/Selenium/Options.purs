@@ -8,7 +8,7 @@ foreign import data Options' :: Row Type -> Type
 
 
 
-type ChromeOptions = Options' ( headless :: Void )
+type ChromeOptions = Options' ( headless :: Void, noSandBox :: Void )
 type EdgeOptions = Options' ()
 type FirefoxOptions = Options' ()
 type IEOptions = Options' ()

@@ -8,7 +8,7 @@ foreign import data Options' :: Row Type -> Type
 
 
 
-type ChromeOptions = Options' ( headless :: Void, noSandBox :: Void )
+type ChromeOptions = Options' ( headless :: Void, noSandbox :: Void )
 type EdgeOptions = Options' ()
 type FirefoxOptions = Options' ()
 type IEOptions = Options' ()
@@ -26,7 +26,7 @@ foreign import setHeadless
   :: forall r. Options' ( headless :: Void | r ) 
   -> Options' ( headless :: Void | r)
 
-foreign import setNoSandBox
+foreign import setNoSandbox
   :: forall r. Options' ( noSandbox :: Void | r ) 
   -> Options' ( noSandbox :: Void | r)
 

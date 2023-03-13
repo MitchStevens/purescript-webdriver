@@ -117,7 +117,7 @@ byClassName = lift <<< S.byClassName
 
 byDataAutomation :: String -> Selenium Locator
 byDataAutomation dataAutomationTag =
-  byXPath ("//*[@data-automation='" <> dataAutomationTag <>"']")
+  byXPath (".//*[@data-automation='" <> dataAutomationTag <>"']")
 
 -- | get element by action returning an element
 -- | ```purescript
